@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@appbaseio/reactivesearch": "^2.6.6",
+    "@telemundo/react-mpx-player": "^1.0.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
