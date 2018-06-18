@@ -12,12 +12,12 @@ class App extends Component {
 	}
 
 	updateInput(key, value) {
-	 // update react state
-	 this.setState({ [key]: value });
+		// update react state
+		this.setState({ [key]: value });
 
-	 // update localStorage
-	 localStorage.setItem(key, value);
- }
+		// update localStorage
+		localStorage.setItem(key, value);
+	}
 	handleVidClick(mediaId) {
 		this.setState({currentVideo: mediaId})
 	}
@@ -30,65 +30,58 @@ class App extends Component {
 
 
 				<DataSearch
-				  componentId="SearchSensor"
-				  dataField={["keywords", "title", "description"]}
-				/>
+					componentId="SearchSensor"
+					dataField={["keywords", "title", "description"]}
+					/>
 
 				<ReactMpxPlayer
-					 className="GallerySliderVideo"
-					 width="50%"
-					 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
-					 allowFullScreen
-					 onLoad={() => {
-						 console.log('Player is Loaded!')
-					 }}
-					 onPdkControllerInstalled={pdkController => {
-						 pdkController.addEventListener('OnMediaStart', () => {
-							 console.log('Media has started!');
-							 // Pause the video after 10 seconds of playing
-							 setTimeout(() => pdkController.pause(true), 10000);
-						 })
-					 }}
-				 />
+					className="GallerySliderVideo"
+					width="50%"
+					src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
+					allowFullScreen
+					onLoad={() => {
+						console.log('Player is Loaded!')
+					}}
+					onPdkControllerInstalled={pdkController => {
+						pdkController.addEventListener('OnMediaStart', () => {
+							console.log('Media has started!');
+							// Pause the video after 10 seconds of playing
+							setTimeout(() => pdkController.pause(true), 10000);
+						})
+					}}
+					/>
 
 				<ReactiveList
 
 					className="video-list"
-				  componentId="SearchResult"
-				  dataField="title"
-				  loader="Loading Results.."
-				  onData={
+					componentId="SearchResult"
+					dataField="title"
+					loader="Loading Results.."
+					onData={
+
 						(res) =>
+						<div key= {res.mediaId}>
+							{
+								res.keywords = res.keywords.map((val, ind, arr) => {
+									// return <div className="results" key={ind}>{ind}{val}</div>
 
-					   <div key= {res.mediaId}>
-							 {
-		 						res.keywords = res.keywords.map((val, ind, arr) => {
-		 						// if(val.includes(",")) {
-								//  arr = val.split(",");
-								//  arr.push("editted----------")
-		 						// }
-								// 	console.log(val);
-									return <div key={ind}>{ind}{val}</div>
+								})
+							}
 
-		 					})
-		 					}
-							 	<ul >
-									<li  onClick={(e) => this.handleVidClick(res.mediaId) }>
-										{res.title}
+							<img className="image" src= {res.image} alt={res.description} height="100" width="100"></img>
+							<li className = "sResults"  onClick={(e) => this.handleVidClick(res.mediaId) }>
+								{res.title}
+							</li>
+						</div>
 
-										<img src= {res.image} alt={res.description} height="100" width="100"></img>
-									</li>
-								</ul>
-						 </div>
-
-						}
-				  onResultStats={(total, took) => {
-				    return "found " + total + " results in " + took + "ms."
-				  }}
-				  react={{
-				    and: ["SearchSensor"]
-				  }}
-				/>
+					}
+					onResultStats={(total, took) => {
+						return "found " + total + " results in " + took + "ms."
+					}}
+					react={{
+						and: ["SearchSensor"]
+					}}
+					/>
 			</ReactiveBase>
 		) // End of render return;
 	}
