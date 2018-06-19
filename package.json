@@ -6,9 +6,11 @@
     "@appbaseio/reactivesearch": "^2.6.6",
     "@telemundo/react-mpx-player": "^1.0.3",
     "auth0-js": "^9.6.1",
+    "history": "^4.7.2",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
