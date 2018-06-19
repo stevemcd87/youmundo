@@ -5,24 +5,28 @@ import history from '../history';
 import auth0 from 'auth0-js';
 
 export default class Auth {
-  auth0 = new auth0.WebAuth({
-    domain: 'youmundo.auth0.com',
-    clientID: '4KuyASwpsANZiiSYicUdgYM632Q-kImj',
-    redirectUri: 'http://localhost:3000/callback',
-    audience: 'https://youmundo.auth0.com/userinfo',
-    responseType: 'token id_token',
-    scope: 'openid'
-  });
-
-  login() {
-    this.auth0.authorize();
-  }
 
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.getProfile = this.getProfile.bind(this);
+  }
+
+  auth0 = new auth0.WebAuth({
+    domain: 'youmundo.auth0.com',
+    clientID: '4KuyASwpsANZiiSYicUdgYM632Q-kImj',
+    redirectUri: 'http://localhost:3000/callback',
+    audience: 'https://youmundo.auth0.com/userinfo',
+    responseType: 'token id_token',
+    scope: 'openid profile'
+  });
+
+  userProfile;
+
+  login() {
+    this.auth0.authorize();
   }
 
   handleAuthentication() {
@@ -47,6 +51,24 @@ export default class Auth {
     history.replace('/home');
   }
 
+  getAccessToken() {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('No Access Token found');
+    }
+    return accessToken;
+  }
+
+  getProfile(cb) {
+    let accessToken = this.getAccessToken();
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+      cb(err, profile);
+    });
+  }
+  
   logout() {
     // Clear Access Token and ID Token from local storage
     localStorage.removeItem('access_token');
