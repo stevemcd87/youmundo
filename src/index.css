@@ -1,8 +1,41 @@
 @media only screen and (max-width: 414px) {
+  #header{
+    height: 4.9em;
+    margin-bottom: 1em;
+    border: 2px solid yellow;
+    background-color: black;
+    background-image: image("background.jpg");
+  }
+
+  #headerBackground{
+    height: 4.5em;
+    width: 14.1em;
+  }
+
+  .Searchbar{
+    width: 23.1em;
+    padding-top: 1em;
+    margin-bottom: 1em;
+  }
+
   body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    border: 2px solid blue;
+  }
+
+  h1{
+    margin-left: .3em;
+    font-size: 2em;
+    border-bottom: 1px solid gray;
+  }
+
+  h2{
+    padding-left: .5em;
+    font-size:2em;
+    margin-left:.3em;
+    border-bottom: 2px solid gray;
   }
 
   li{
@@ -10,27 +43,30 @@
   }
 
   .GallerySliderVideo{
-    width: 23.5em;
+    margin: auto 0;
     border: 1px solid yellow;
+    width: 23.1em;
+    height: 15em;
   }
 
   .video-list{
     border: 1px solid yellow;
-    width: 23.5em;
   }
 
   .results{
-    border: 1px solid red;
+    border: 1px solid orange;
+    width: 23.1em;
   }
 
   .sResults{
-    border: 3px solid black;
+    border: 1px solid black;
     background-color: black;
     opacity: .7;
     color: white;
     width: 23.1em;
     padding-top: .5em;
     padding-bottom: .5em;
+    margin-bottom: 1em;
     text-align: center;
   }
 
@@ -38,6 +74,92 @@
     border: 1px solid blue;
     width: 23.1em;
     height: 15em;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #header{
+    height: 4.9em;
     margin-bottom: 1em;
+    border: 2px solid yellow;
+    background-color: black;
+    background-image: image("background.jpg");
+  }
+
+  #headerBackground{
+    height: 4.5em;
+    width: 14.1em;
+  }
+
+  .Searchbar{
+    width: 23.1em;
+    padding-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    border: 2px solid blue;
+  }
+
+  h1{
+    margin-left: .3em;
+    font-size: 2em;
+    border-bottom: 1px solid gray;
+  }
+
+  h2{
+    padding-left: .5em;
+    font-size:2em;
+    margin-left:.3em;
+    border-bottom: 2px solid gray;
+  }
+
+  li{
+    list-style-type: none;
+  }
+
+  .GallerySliderVideo{
+    margin: auto 0;
+    border: 1px solid yellow;
+    width: 48em;
+    height: 15em;
+  }
+
+  .container{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  .video-list{
+    border: 1px solid yellow;
+  }
+
+  .results{
+    border: 1px solid orange;
+    width: 23.1em;
+  }
+
+  .sResults{
+    border: 1px solid black;
+    background-color: black;
+    opacity: .7;
+    color: white;
+    width: 23.1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: 1em;
+    text-align: center;
+  }
+
+  .image{
+    border: 1px solid blue;
+    width: 23.1em;
+    height: 15em;
   }
 }

@@ -69,6 +69,12 @@
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.6.3.tgz#65682e68a82701c70eefb38d7f941a2c0bfa90de"
 
+"@telemundo/react-mpx-player@^1.0.3":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@telemundo/react-mpx-player/-/react-mpx-player-1.0.4.tgz#b1dfa029424f7646003a0d32b0b6186819139598"
+  dependencies:
+    prop-types "^15.6.0"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"

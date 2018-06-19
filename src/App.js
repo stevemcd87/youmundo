@@ -24,15 +24,20 @@ class App extends Component {
 
 	render() {
 		return (
+
 			<ReactiveBase
 				app="YouMundo"
 				credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b">
 
+				<div id= "header">
+					<DataSearch
+						className="Searchbar"
+						componentId="SearchSensor"
+						dataField={["keywords", "title", "description"]}
+						/>
+				</div>
 
-				<DataSearch
-					componentId="SearchSensor"
-					dataField={["keywords", "title", "description"]}
-					/>
+				<h1> Welcome to YouMundo</h1>
 
 				<ReactMpxPlayer
 					className="GallerySliderVideo"
@@ -50,49 +55,53 @@ class App extends Component {
 						})
 					}}
 					/>
+				<div className="container">
+					<ReactiveList
+						className="video-list"
+						componentId="SearchResult"
+						dataField="title"
+						loader="Loading Results.."
+						onData={
+							(res) =>
+							<div key= {res.mediaId}>
+								{
+									res.keywords = res.keywords.map((val, ind, arr) => {
+										<h2> Most Popular</h2>
+										// return <div className="results" key={ind}>{ind}{val}</div>
 
-				<ReactiveList
+									})
+								}
+								<img className="image" src= {res.image} alt={res.description} height="100" width="100"></img>
+								<li className = "sResults"  onClick={(e) => this.handleVidClick(res.mediaId) }>
+									{res.title}
+								</li>
+							</div>
 
-					className="video-list"
-					componentId="SearchResult"
-					dataField="title"
-					loader="Loading Results.."
-					onData={
 
-						(res) =>
-						<div key= {res.mediaId}>
-							{
-								res.keywords = res.keywords.map((val, ind, arr) => {
-									// return <div className="results" key={ind}>{ind}{val}</div>
 
-								})
-							}
+						}
+						onResultStats={(total, took) => {
+							return "found " + total + " results in " + took + "ms."
+						}}
+						react={{
+							and: ["SearchSensor"]
+						}}
+						/>
+					</div>
+					<footer>
 
-							<img className="image" src= {res.image} alt={res.description} height="100" width="100"></img>
-							<li className = "sResults"  onClick={(e) => this.handleVidClick(res.mediaId) }>
-								{res.title}
-							</li>
-						</div>
-
-					}
-					onResultStats={(total, took) => {
-						return "found " + total + " results in " + took + "ms."
-					}}
-					react={{
-						and: ["SearchSensor"]
-					}}
-					/>
-			</ReactiveBase>
-		) // End of render return;
+					</footer>
+				</ReactiveBase>
+			) // End of render return;
+		}
 	}
-}
 
-App.propTypes = {
-	handleVidClick: PropTypes.func.isRequired,
-	app: PropTypes.shape({
-		currentVideo: PropTypes.string.isRequired
-	})
-}
+	App.propTypes = {
+		handleVidClick: PropTypes.func.isRequired,
+		app: PropTypes.shape({
+			currentVideo: PropTypes.string.isRequired
+		})
+	}
 
 
-export default App;
+	export default App;
