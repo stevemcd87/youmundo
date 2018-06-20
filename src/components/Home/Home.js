@@ -7,7 +7,9 @@ class Home extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			currentVideo: "P4R_3ErslAOQ"
+			currentVideo: "P4R_3ErslAOQ",
+			currentTitle: "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
+			currentDescription: "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos"
 		}
 	}
 
@@ -63,19 +65,12 @@ class Home extends Component {
 					   <div key= {res.mediaId}>
 							 {
 		 						res.keywords = res.keywords.map((val, ind, arr) => {
-		 						// if(val.includes(",")) {
-								//  arr = val.split(",");
-								//  arr.push("editted----------")
-		 						// }
-								// 	console.log(val);
 									return <div key={ind}>{ind}{val}</div>
-
 		 					})
 		 					}
 							 	<ul >
 									<li  onClick={(e) => this.handleVidClick(res.mediaId) }>
 										{res.title}
-
 										<img src= {res.image} alt={res.description} height="100" width="100"></img>
 									</li>
 								</ul>

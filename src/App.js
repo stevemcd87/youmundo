@@ -1,34 +1,8 @@
-// import React, { Component } from 'react';
-// import { ReactiveBase,DataSearch, CategorySearch, ReactiveList } from '@appbaseio/reactivesearch';
-// import ReactMpxPlayer from '@telemundo/react-mpx-player';
-// import PropTypes from 'prop-types';
-// import Videos from './Videos/Videos';
-//
-// const auth = new Auth();
-// auth.login();
-// class App extends Component {
-//
-//
-//
-// 	render() {
-// 		return (
-//
-//       <Videos />
-//
-// 		) // End of render return;
-// 	}
-//
-// }
-//
-//
-//
-//
-// export default App;
-
 // src/App.js
 
 import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
+import Profile from './components/Profile/Profile';
 import './App.css';
 
 class App extends Component {
@@ -53,14 +27,15 @@ class App extends Component {
           <Navbar.Header>
             {/* <Navbar.Brand>
               <a href="#">Auth0 - React</a>
-            </Navbar.Brand> */}
-            {/* <Button
+            </Navbar.Brand>
+            <Button
               bsStyle="primary"
               className="btn-margin"
               onClick={this.goTo.bind(this, 'home')}
             >
               Home
             </Button> */}
+
             {
               !isAuthenticated() && (
                   <Button
@@ -70,6 +45,9 @@ class App extends Component {
                   >
                     Log In
                   </Button>
+
+
+
                 )
             }
             {
@@ -79,14 +57,17 @@ class App extends Component {
                     className="btn-margin"
                     onClick={this.logout.bind(this)}
                   >
+                      <p>{console.log(this.props.auth)}</p>
+                      <p>{console.log(this.props.auth.auth0)}</p>
                     Log Out
+                    <Profile auth={this.props.auth} {...this.props} />
                   </Button>
                 )
             }
           </Navbar.Header>
         </Navbar>
       </div>
-    );
+    )
   }
 }
 
