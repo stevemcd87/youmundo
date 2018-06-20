@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@appbaseio/reactivesearch": "^2.6.6",
+    "@material-ui/core": "^1.2.2",
+    "@material-ui/icons": "^1.1.0",
     "@telemundo/react-mpx-player": "^1.0.3",
     "auth0-js": "^9.6.1",
     "history": "^4.7.2",
