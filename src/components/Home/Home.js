@@ -2,30 +2,67 @@ import React, { Component } from 'react';
 import { ReactiveBase,DataSearch, CategorySearch, ReactiveList } from '@appbaseio/reactivesearch';
 import ReactMpxPlayer from '@telemundo/react-mpx-player';
 import PropTypes from 'prop-types';
+
+
+let recommendedList = [];
+let videosClicked = [];
+let lsBoolean;
+let lsList;
 class Home extends Component {
 
 	constructor(props){
 		super(props)
 		this.state = {
 			currentVideo: "P4R_3ErslAOQ",
-			currentTitle: "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
-			currentDescription: "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos"
+			currentKeywords: ["Telemundo,Noticias Telemundo,Información,profesionales,msn,\"Abrazos no muros\",reencuentro frontera México-EEUU"]
 		}
 	}
 
-	updateInput(key, value) {
-	 // update react state
-	 this.setState({ [key]: value });
+	componentWillMount () {
+		lsList = JSON.parse(localStorage.getItem("videosClicked"));
 
-	 // update localStorage
-	 localStorage.setItem(key, value);
- }
-	handleVidClick(mediaId) {
-		this.setState({currentVideo: mediaId})
+		(lsList ) ? lsBoolean=true : lsBoolean = false;
+		console.log(lsList);
+
 	}
+
+	returnIfMatched(mediaId){
+		let matched = false;
+		if (lsBoolean ) {
+			console.log(lsList);
+
+			lsList.forEach((val)=>{
+				matched = false;
+				if(val === mediaId) {
+					matched = true;
+				}
+			})
+
+			if (matched) {
+				console.log("return if matched =========");
+				return <p>one matched</p>
+			}
+
+		}
+	}
+
+	handleVidClick(mediaId) {
+		this.setState({
+			currentVideo: mediaId,
+		});
+		const currentState = this.state;
+
+		videosClicked.push(currentState.currentVideo);
+		videosClicked = Array.from(new Set(videosClicked));
+		localStorage.setItem('videosClicked', JSON.stringify(videosClicked));
+
+	}
+
+
 
 	render() {
 		return (
+
 			<ReactiveBase
 				app="YouMundo"
 				credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b">
@@ -34,6 +71,16 @@ class Home extends Component {
 				<DataSearch
 				  componentId="SearchSensor"
 				  dataField={["keywords", "title", "description"]}
+					onValueSelected={function(value) {
+
+							recommendedList.push(value);
+							recommendedList = Array.from(new Set(recommendedList));
+							localStorage.setItem('userSearches', JSON.stringify(recommendedList));
+							console.log(recommendedList);
+
+
+	 					}
+ 					}
 				/>
 
 				<ReactMpxPlayer
@@ -53,6 +100,8 @@ class Home extends Component {
 					 }}
 				 />
 
+
+
 				<ReactiveList
 
 					className="video-list"
@@ -63,6 +112,7 @@ class Home extends Component {
 						(res) =>
 
 					   <div key= {res.mediaId}>
+
 							 {
 		 						res.keywords = res.keywords.map((val, ind, arr) => {
 									return <div key={ind}>{ind}{val}</div>
@@ -74,6 +124,7 @@ class Home extends Component {
 										<img src= {res.image} alt={res.description} height="100" width="100"></img>
 									</li>
 								</ul>
+
 						 </div>
 
 						}
@@ -84,6 +135,7 @@ class Home extends Component {
 				    and: ["SearchSensor"]
 				  }}
 				/>
+
 			</ReactiveBase>
 		) // End of render return;
 	}
