@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ReactiveBase,DataSearch, CategorySearch, ReactiveList } from '@appbaseio/reactivesearch';
 import ReactMpxPlayer from '@telemundo/react-mpx-player';
 import PropTypes from 'prop-types';
-import MiniDrawer from '../MiniDrawer'
 class Home extends Component {
 
 	constructor(props){
@@ -30,62 +29,61 @@ class Home extends Component {
 			<ReactiveBase
 				app="YouMundo"
 				credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b">
-				<div>
-				<MiniDrawer
+
+
+				<DataSearch
+				  componentId="SearchSensor"
+				  dataField={["keywords", "title", "description"]}
 				/>
-					<DataSearch
-						componentId="SearchSensor"
-						dataField={["keywords", "title", "description"]}
-					/>
-				</div>
-					<ReactMpxPlayer
-						 className="GallerySliderVideo"
-						 width="50%"
-						 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
-						 allowFullScreen
-						 onLoad={() => {
-							 console.log('Player is Loaded!')
-						 }}
-						 onPdkControllerInstalled={pdkController => {
-							 pdkController.addEventListener('OnMediaStart', () => {
-								 console.log('Media has started!');
-								 // Pause the video after 10 seconds of playing
-								 setTimeout(() => pdkController.pause(true), 10000);
-							 })
-						 }}
-					 />
-					 <ReactiveList
 
-						 className="video-list"
-						 componentId="SearchResult"
-						 dataField="title"
-						 loader="Loading Results.."
-						 onData={
-							 (res) =>
+				<ReactMpxPlayer
+					 className="GallerySliderVideo"
+					 width="50%"
+					 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
+					 allowFullScreen
+					 onLoad={() => {
+						 console.log('Player is Loaded!')
+					 }}
+					 onPdkControllerInstalled={pdkController => {
+						 pdkController.addEventListener('OnMediaStart', () => {
+							 console.log('Media has started!');
+							 // Pause the video after 10 seconds of playing
+							 setTimeout(() => pdkController.pause(true), 10000);
+						 })
+					 }}
+				 />
 
-								<div key= {res.mediaId}>
-									{
-									 res.keywords = res.keywords.map((val, ind, arr) => {
-										 return <div key={ind}>{ind}{val}</div>
-								 })
-								 }
-									 <ul >
-										 <li  onClick={(e) => this.handleVidClick(res.mediaId) }>
-											 {res.title}
-											 <img src= {res.image} alt={res.description} height="100" width="100"></img>
-										 </li>
-									 </ul>
-								</div>
+				<ReactiveList
 
-							 }
-						 onResultStats={(total, took) => {
-							 return "found " + total + " results in " + took + "ms."
-						 }}
-						 react={{
-							 and: ["SearchSensor"]
-						 }}
-					 />
+					className="video-list"
+				  componentId="SearchResult"
+				  dataField="title"
+				  loader="Loading Results.."
+				  onData={
+						(res) =>
 
+					   <div key= {res.mediaId}>
+							 {
+		 						res.keywords = res.keywords.map((val, ind, arr) => {
+									return <div key={ind}>{ind}{val}</div>
+		 					})
+		 					}
+							 	<ul >
+									<li  onClick={(e) => this.handleVidClick(res.mediaId) }>
+										{res.title}
+										<img src= {res.image} alt={res.description} height="100" width="100"></img>
+									</li>
+								</ul>
+						 </div>
+
+						}
+				  onResultStats={(total, took) => {
+				    return "found " + total + " results in " + took + "ms."
+				  }}
+				  react={{
+				    and: ["SearchSensor"]
+				  }}
+				/>
 			</ReactiveBase>
 		) // End of render return;
 	}

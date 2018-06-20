@@ -12,3 +12,9 @@ body {
 .search {
   margin-top: 20px;
 }
+
+.logo {
+  height: 37px;
+  width: 65px;
+  border-radius: 15px 0em 10px 5px;
+}
