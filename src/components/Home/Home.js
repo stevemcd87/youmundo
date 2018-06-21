@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { ReactiveBase,DataSearch, ReactiveList } from '@appbaseio/reactivesearch';
 import ReactMpxPlayer from '@telemundo/react-mpx-player';
+import PropTypes from 'prop-types';
+import MiniDrawer from '../MiniDrawer.js'
+import SimpleMediaCard from '../SimpleMediaCard.js'
+import Grid from '@material-ui/core/Grid';
+
 // import PropTypes from 'prop-types';
 
 
@@ -9,6 +14,7 @@ let videosClicked = [];
 let lsBoolean;
 let lsList;
 let searchList;
+
 
 class Home extends Component {
 
@@ -143,10 +149,15 @@ class Home extends Component {
 	render() {
 		return (
 
+			<MiniDrawer>
+
+
 			<ReactiveBase
 				app="YouMundo"
 				credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b">
 				<DataSearch
+					className="search-bar"
+					width="80%"
 				  componentId="SearchSensor"
 				  dataField={["keywords", "title", "description"]}
 					onValueSelected={function(value) {
@@ -162,7 +173,8 @@ class Home extends Component {
 				/>
 				<ReactMpxPlayer
 					 className="GallerySliderVideo"
-					 width="50%"
+					 height="80%"
+					 width="80%"
 					 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
 					 allowFullScreen
 					 onLoad={() => {
@@ -176,6 +188,7 @@ class Home extends Component {
 						 })
 					 }}
 				 />
+
 				<ReactiveList
 					className="video-list"
 				  componentId="SearchResult"
@@ -238,6 +251,36 @@ class Home extends Component {
 				  }}
 				/>
 			</ReactiveBase>
+			</MiniDrawer>
+
+// 					 <ReactiveList
+// 						 className="video-list"
+// 						 componentId="SearchResult"
+// 						 dataField="title"
+// 						 loader="Loading Results.."
+// 						 onData={
+// 							 (res) =>
+							 	
+// 								 	<SimpleMediaCard
+// 				           	key={res.mediaId}
+// 									 	title={res.title}
+// 				           	keywords={res.keywords}
+// 				           	onClick={(e) => this.handleVidClick(res.mediaId) }
+// 				           	image={res.image}
+// 				           	description={res.description}
+// 				         	/>
+
+
+// 						 }
+// 						 onResultStats={(total, took) => {
+// 							 return "found " + total + " results in " + took + "ms."
+// 						 }}
+// 						 react={{
+// 							 and: ["SearchSensor"]
+// 						 }}
+// 					 />
+
+
 		) // End of render return;
 	}
 }
