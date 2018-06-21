@@ -10,33 +10,32 @@ import MailIcon from '@material-ui/icons/Mail';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ReportIcon from '@material-ui/icons/Report';
 
-
 export const mailFolderListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
         <InboxIcon />
       </ListItemIcon>
-      <ListItemText primary="Home" />
+      <ListItemText primary="Inbox" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <StarIcon />
       </ListItemIcon>
-      <ListItemText primary="Trending" />
+      <ListItemText primary="Starred" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <SendIcon />
       </ListItemIcon>
-      <ListItemText primary="Subscription" />
+      <ListItemText primary="Send mail" />
     </ListItem>
-    {/* <ListItem button>
+    <ListItem button>
       <ListItemIcon>
         <DraftsIcon />
       </ListItemIcon>
       <ListItemText primary="Drafts" />
-    </ListItem> */}
+    </ListItem>
   </div>
 );
 

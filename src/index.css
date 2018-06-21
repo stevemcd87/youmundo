@@ -10,10 +10,6 @@ body {
   height: 2px;
 }
 
-.nav-bar {
-  height: 20px;
-}
-
 .search-bar {
   display: inline-block;
   margin-top: 40px;
@@ -24,5 +20,5 @@ body {
   height: 55px;
 }
 .MiniDrawer-content-9 {
-  padding-top: 10px;
+
 }
