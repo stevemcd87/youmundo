@@ -7,14 +7,22 @@ body {
 .MuiToolbar-root-45 {
   background-color: #fff;
   color: #888;
+  height: 2px;
 }
 
-.search {
-  margin-top: 20px;
+.nav-bar {
+  height: 20px;
+}
+
+.search-bar {
+  display: inline-block;
+  margin-top: 40px;
+  width: 80%;
 }
 
 .logo {
-  height: 37px;
-  width: 65px;
-  border-radius: 15px 0em 10px 5px;
+  height: 55px;
+}
+.MiniDrawer-content-9 {
+  padding-top: 10px;
 }

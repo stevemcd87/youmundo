@@ -21,7 +21,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 430,
+    height: "100vh",
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -112,7 +112,8 @@ class MiniDrawer extends React.Component {
               onClick={this.handleDrawerOpen}
               className={classNames(classes.menuButton, this.state.open && classes.hide)}
             >
-              <MenuIcon />
+              <MenuIcon
+              />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
               <img className="logo" src="./img/logo.png" />
@@ -138,9 +139,7 @@ class MiniDrawer extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} >
-            <Typography noWrap>{'You think water moves fast? You should see ice.'}
-
-            </Typography>
+            {this.props.children}
 
           </div>
         </main>
