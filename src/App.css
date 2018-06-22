@@ -50,3 +50,8 @@ table {
 input{
   width: 80%;
 }
+
+a{
+		border: 1px solid black;
+		height: 1em;
+}

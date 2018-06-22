@@ -67,76 +67,66 @@ class Home extends Component {
 				app="YouMundo"
 				credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b">
 
+				<div id= "header">
+					<DataSearch
+						className="Searchbar"
+						componentId="SearchSensor"
+						dataField={["keywords", "title", "description"]}
+						/>
+				</div>
 
-				<DataSearch
-				  componentId="SearchSensor"
-				  dataField={["keywords", "title", "description"]}
-					onValueSelected={function(value) {
-
-							recommendedList.push(value);
-							recommendedList = Array.from(new Set(recommendedList));
-							localStorage.setItem('userSearches', JSON.stringify(recommendedList));
-							console.log(recommendedList);
-
-
-	 					}
- 					}
-				/>
+				<h1 id="headline"> Welcome to YouMundo</h1>
 
 				<ReactMpxPlayer
-					 className="GallerySliderVideo"
-					 width="50%"
-					 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
-					 allowFullScreen
-					 onLoad={() => {
-						 console.log('Player is Loaded!')
-					 }}
-					 onPdkControllerInstalled={pdkController => {
-						 pdkController.addEventListener('OnMediaStart', () => {
-							 console.log('Media has started!');
-							 // Pause the video after 10 seconds of playing
-							 setTimeout(() => pdkController.pause(true), 10000);
-						 })
-					 }}
-				 />
+					className="GallerySliderVideo"
+					src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
+					allowFullScreen
+					onLoad={() => {
+						console.log('Player is Loaded!')
+					}}
+					onPdkControllerInstalled={pdkController => {
+						pdkController.addEventListener('OnMediaStart', () => {
+							console.log('Media has started!');
+							// Pause the video after 10 seconds of playing
+							setTimeout(() => pdkController.pause(true), 10000);
+						})
+					}}
+					/>
+
+					<ReactiveList
+						className="video-list"
+						componentId="SearchResult"
+						dataField="title"
+						loader="Loading Results.."
+						onData={
+							(res) =>
+							<div key= {res.mediaId}>
+								{
+									res.keywords = res.keywords.map((val, ind, arr) => {
+										// return <div className="results" key={ind}>{ind}{val}</div>
+
+									})
+								}
+								<img className="image" src= {res.image} alt={res.description}></img>
+								<li className = "sResults"  onClick={(e) => this.handleVidClick(res.mediaId) }>
+									{res.title}
+								</li>
+							</div>
 
 
-
-				<ReactiveList
-
-					className="video-list"
-				  componentId="SearchResult"
-				  dataField="title"
-				  loader="Loading Results.."
-				  onData={
-						(res) =>
-
-					   <div key= {res.mediaId}>
-
-							 {
-		 						res.keywords = res.keywords.map((val, ind, arr) => {
-									return <div key={ind}>{ind}{val}</div>
-		 					})
-		 					}
-							 	<ul >
-									<li  onClick={(e) => this.handleVidClick(res.mediaId) }>
-										{res.title}
-										<img src= {res.image} alt={res.description} height="100" width="100"></img>
-									</li>
-								</ul>
-
-						 </div>
 
 						}
-				  onResultStats={(total, took) => {
-				    return "found " + total + " results in " + took + "ms."
-				  }}
-				  react={{
-				    and: ["SearchSensor"]
-				  }}
-				/>
+						onResultStats={(total, took) => {
+						}}
+						react={{
+							and: ["SearchSensor"]
+						}}
+						/>
+					<footer>
 
-			</ReactiveBase>
+					</footer>
+				</ReactiveBase>
+
 		) // End of render return;
 	}
 }
