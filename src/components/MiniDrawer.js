@@ -13,15 +13,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
-import { DataSearch, ReactiveList } from '@appbaseio/reactivesearch'
-import ReactMpxPlayer from '@telemundo/react-mpx-player';
+// import { DataSearch, ReactiveList } from '@appbaseio/reactivesearch'
+// import ReactMpxPlayer from '@telemundo/react-mpx-player';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: "100vh",
+    // height: "100vh",
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',

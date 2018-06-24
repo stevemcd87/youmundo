@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { ReactiveBase,DataSearch, ReactiveList } from '@appbaseio/reactivesearch';
 import ReactMpxPlayer from '@telemundo/react-mpx-player';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import MiniDrawer from '../MiniDrawer.js'
-import SimpleMediaCard from '../SimpleMediaCard.js'
-import Grid from '@material-ui/core/Grid';
+// import SimpleMediaCard from '../SimpleMediaCard.js'
+// import Grid from '@material-ui/core/Grid';
 
 // import PropTypes from 'prop-types';
 
@@ -12,8 +12,8 @@ import Grid from '@material-ui/core/Grid';
 let recommendedList = [];
 let videosClicked = [];
 let lsBoolean;
-let lsList;
-let searchList;
+let lsVideoList = [];
+let lsSearchedList = [];
 
 
 class Home extends Component {
@@ -23,13 +23,20 @@ class Home extends Component {
 		this.state = {
 			currentVideoInfo: {},
 			usersLSvideosClicked: [],
-			usersLSsearches:[]
+			usersLSsearches:[],
+			usersRecommendedList: []
 		}
 	}
 
 	componentWillMount () {
-		this.state.usersLSvideosClicked = JSON.parse(localStorage.getItem("videosClicked"));
-		this.state.usersLSsearches = JSON.parse(localStorage.getItem("userSearches"));
+		this.setState({
+			usersLSvideosClicked: JSON.parse(localStorage.getItem("videosClicked"))
+		})
+		this.setState({
+			usersLSsearches: JSON.parse(localStorage.getItem("userSearches"))
+		})
+		// console.log(this.state);
+
 		this.state.currentVideoInfo = {
 		 "title": "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
 		 "description": "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos",
@@ -43,7 +50,7 @@ class Home extends Component {
 		 ],
 		 "image": "http://stage.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2016/08/11/amor-invade-frontera-de-mexico-y-eeuu.jpg"
 		};
-		(lsList ) ? lsBoolean=true : lsBoolean = false;
+		(lsVideoList ) ? lsBoolean=true : lsBoolean = false;
 	}
 
 	// componentWillUpdate(){
@@ -54,14 +61,14 @@ class Home extends Component {
 	// 	}
 	// }
 
-	// componentDidMount(){
-	// 	console.log(this.state);
-	// }
+	componentDidMount(){
+		console.log(this.state);
+	}
 
 	returnIfMatched(mediaId){
 		let matched = false;
 		if (lsBoolean ) {
-			lsList.forEach((val)=>{
+			lsVideoList.forEach((val)=>{
 				matched = false;
 				if(val === mediaId) {
 					matched = true;
@@ -91,29 +98,43 @@ class Home extends Component {
 	compareSearchesToKeywords(data){
 		const searchedWords =  this.state.usersLSsearches;
 		data.map((val, ind)=>{
-				if (ind === 0 ){
+			// console.log("val");
+			// console.log(val);
+				if (val.keywords ){
 					val.keywords.forEach((val2)=>{
-						searchedWords.forEach((val3)=>{
-							if(val3 === val2){
-								const valString = JSON.stringify(val);
-								recommendedList.push(valString);
-								recommendedList = Array.from(new Set(recommendedList));
-							}
-						})
-
+						// console.log("val2");
+						// console.log(val2);
+						if (searchedWords){
+							searchedWords.forEach((val3)=>{
+								if(val3 === val2){
+									// console.log("val3");
+									// console.log(val3);
+									const valString = JSON.stringify(val);
+									recommendedList.push(valString);
+									recommendedList = Array.from(new Set(recommendedList));
+									// recommendedList = JSON.parse(recommendedList);
+									console.log(recommendedList);
+									// return recommendedList;
+									// this.setState({
+									// 	usersRecommendedList: recommendedList
+									// })
+								}
+							})
+						}
 					})
+				} else {
+					// console.error(val);
 				}
 			})
-			console.log("recommendedList=============");
-			console.log(recommendedList);
-			return recommendedList
+			// console.log("recommendedList=============");
+			// console.log(recommendedList);
+			// return recommendedList
 
 	}
 
 
 	Item(videoInfo) {
   return (
-
 		<ul onClick={(e)=> this.handleVidClick(videoInfo)} key={JSON.stringify(videoInfo)} >
 			<li key={videoInfo.title}>{videoInfo.title}</li>
 			<img alt= {videoInfo.title} key= {videoInfo.image} src= {videoInfo.image} className="list-image"></img>
@@ -123,34 +144,20 @@ class Home extends Component {
 
 	recentlyViewed(videoInfo){
 		return (
-			<ul>
+			<ul key={videoInfo.permalink}>
 				{
 						<li  onClick={(e) => this.handleVidClick(videoInfo) }>
-
 						 <img src= {videoInfo.image} height="100" width="100"></img>
 					 </li>
 					}
 			</ul>
 		)
 	}
-	// recommendedList(videoInfo){
-	// 	return (
-	// 		<ul>
-	// 			{
-	// 					<li  onClick={(e) => this.(videoInfo) }>
-	//
-	// 					 <img src= {videoInfo.image} height="100" width="100"></img>
-	// 				 </li>
-	// 				}
-	// 		</ul>
-	// 	)
-	// }
 
 	render() {
 		return (
 
 			<MiniDrawer>
-
 
 			<ReactiveBase
 				app="YouMundo"
@@ -161,21 +168,21 @@ class Home extends Component {
 				  componentId="SearchSensor"
 				  dataField={["keywords", "title", "description"]}
 					onValueSelected={function(value) {
-							recommendedList.push(value);
-							recommendedList = Array.from(new Set(recommendedList));
-							localStorage.setItem('userSearches', JSON.stringify(recommendedList));
-							console.log(recommendedList);
-							console.log("recommendedList================");
-
+							lsSearchedList.push(value);
+							lsSearchedList = Array.from(new Set(lsSearchedList));
+							localStorage.setItem('userSearches', JSON.stringify(lsSearchedList));
+							this.setState({usersLSsearches: lsSearchedList});
+							console.log(lsSearchedList);
+							console.log("lsSearchedList================");
 							// this.handleSearch(recommendedList);
-	 					}
+	 					}.bind(this)
  					}
 				/>
 				<ReactMpxPlayer
 					 className="GallerySliderVideo"
 					 height="80%"
 					 width="80%"
-					 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideo}?autoPlay=true&mute=false`}
+					 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideoInfo.mediaId}?autoPlay=true&mute=false`}
 					 allowFullScreen
 					 onLoad={() => {
 						 console.log('Player is Loaded!')
@@ -198,8 +205,9 @@ class Home extends Component {
 				  onAllData={
 						(res) =>
 						 <div className= "body">
-							 <div className= "regular">
+							 {								this.compareSearchesToKeywords(res)}
 
+							 <div className= "regular">
 								 <h1>Regular</h1>
 								 <div className= "list">
 									 {res.map((object, ind) => {
@@ -227,21 +235,24 @@ class Home extends Component {
 									 </div>
 								 </div>
 								}
-								{/* {this.state.usersLSsearches &&
-									<div className= "recommended-list">
+								{this.state.usersLSsearches &&								<div className= "recommended-list">
 										<h1>Recommended</h1>
+
 										<div className="list">
-											{ recommendedList.map((object, ind) => {
-												if(ind < 5) {
-													return (
-														this.recentlyViewed(object)
-													)
-												}
+											{
+				 							recommendedList.map((object, ind) => {
+												const parsedObject = JSON.parse(object);
+												console.log(parsedObject);
+												return (
+													this.recentlyViewed(parsedObject)
+												)
+
 											}
 										)}
 										</div>
 									</div>
-							} */}
+
+						}
 
 						 </div> //END OF BODY
 
@@ -252,35 +263,6 @@ class Home extends Component {
 				/>
 			</ReactiveBase>
 			</MiniDrawer>
-
-// 					 <ReactiveList
-// 						 className="video-list"
-// 						 componentId="SearchResult"
-// 						 dataField="title"
-// 						 loader="Loading Results.."
-// 						 onData={
-// 							 (res) =>
-							 	
-// 								 	<SimpleMediaCard
-// 				           	key={res.mediaId}
-// 									 	title={res.title}
-// 				           	keywords={res.keywords}
-// 				           	onClick={(e) => this.handleVidClick(res.mediaId) }
-// 				           	image={res.image}
-// 				           	description={res.description}
-// 				         	/>
-
-
-// 						 }
-// 						 onResultStats={(total, took) => {
-// 							 return "found " + total + " results in " + took + "ms."
-// 						 }}
-// 						 react={{
-// 							 and: ["SearchSensor"]
-// 						 }}
-// 					 />
-
-
 		) // End of render return;
 	}
 }
