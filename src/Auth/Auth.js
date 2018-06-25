@@ -17,7 +17,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'youmundo.auth0.com',
     clientID: '4KuyASwpsANZiiSYicUdgYM632Q-kImj',
-    redirectUri: 'http://sleepy-lamport-b0118d.netlify.com/callback',
+    redirectUri: 'https://youmundo.herokuapp.com/callback',
     audience: 'https://youmundo.auth0.com/userinfo',
     responseType: 'token id_token',
     scope: 'openid profile'
