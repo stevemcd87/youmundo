@@ -149,7 +149,11 @@ class PersistentDrawer extends React.Component {
         <Divider />
         <List>
           <div>
+<<<<<<< HEAD
             <ListItem button>
+=======
+            <ListItem button >
+>>>>>>> fizzy
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
@@ -190,7 +194,11 @@ class PersistentDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap>
+<<<<<<< HEAD
                 <img className="logo" src="./img/logo.png" />
+=======
+                YouMundo
+>>>>>>> fizzy
               </Typography>
             </Toolbar>
           </AppBar>

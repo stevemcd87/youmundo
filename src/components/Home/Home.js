@@ -221,16 +221,18 @@ class Home extends Component {
 							componentId="SearchResult"
 							dataField="title"
 							loader="Loading Results.."
-							size={8}
-							pagination={true}
-							pages={5}
+							size={120}
 							onAllData={
 								(res) => {
+
 									return(
-										<Grid container spacing={16}>
+
+										<Grid container spacing={24}>
+											{ this.compareSearchesToKeywords(res)}
 											{
-												res.map( (results) => {
-													return(
+												res.map( (results, ind) => {
+													if(ind < 4){
+														return(
 														<Grid
 															key={results.mediaId}
 															item xs={6}
@@ -246,13 +248,45 @@ class Home extends Component {
 															</ListItem>
 															}
 														</Grid>
-													)
+													)}
+
 												})
 											}
+											{this.state.usersLSsearches &&
+												<div>
+													<h1>Recommended</h1>
+												<Grid container spacing={16}>
+
+
+														{
+							 							recommendedList.map((object, ind) => {
+															const parsedObject = JSON.parse(object);
+															return (
+																<Grid
+																	key={parsedObject.mediaId}
+																	item xs={3}
+
+																	onClick={(e) => {this.handleVidClick(parsedObject)}}
+																>
+																	<ListItem button><SimpleMediaCard title={parsedObject.title} image={parsedObject.image} /></ListItem>
+																</Grid>
+
+															)
+
+														}
+													)}
+
+												</Grid>
+											</div>
+
+									}
+
 										</Grid>
+
 									)
 								}
 							}
+
 							react={{ and: ["SearchSensor"] }}
 						/>
 					}
