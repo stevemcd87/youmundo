@@ -1,12 +1,110 @@
+@media only screen and (max-width: 600px) {
+  *{
+    font-size: 1em;
+  }
+
+  html, body{
+    border: 1px solid yellow;
+    width: 100%;
+  }
+
+  h2.MuiTypography-root-76.MuiTypography-headline-81.MuiTypography-gutterBottom-93{
+    font-size: 1.5em;
+  }
+
+  .MuiCardMedia-root-235.SimpleMediaCard-media-233{
+    display: block;
+  }
+
+  .MuiPaper-root-25.MuiPaper-elevation2-29.MuiPaper-rounded-26.MuiCard-root-234.SimpleMediaCard-card-232{
+    border-bottom: 1px solid gray;
+  }
+
+  h2.MuiTypography-root-76.MuiTypography-headline-81.MuiTypography-gutterBottom-93{
+    text-align: center;
+  }
+
+  .MuiToolbar-root-45 {
+    background-color: #fff;
+    color: #888;
+    height: 2px;
+  }
+
+  .GallerySliderVideo{
+    margin-left: 1.7em;
+    width: 21em;
+  }
+
+  .search-bar{
+    margin-left: 1.6em;
+    width: 21em;
+  }
+
+  .MuiPaper-root-25.MuiPaper-elevation2-29.MuiPaper-rounded-26.MuiCard-root-234.SimpleMediaCard-card-232{
+    margin-right: 1em;
+  }
+
+  .headline{
+    margin-left: 1em;
+    font-size: 1.5em;
+    border-bottom: 1px solid gray;
+  }
+  .container{
+    margin-left: .8em;
+  }
+
+  .container2{
+    margin-left: 1.5em;
+  }
 
 
-.MuiToolbar-root-45 {
-  background-color: #fff;
-  color: #888;
 }
 
 
 
-.logo {
-  height: 55px;
+
+
+@media only screen and (min-width: 768px) {
+  html{
+    border: 1px solid yellow;
+    width: 100%;
+  }
+
+  .MuiToolbar-root-45 {
+    background-color: #fff;
+    color: #888;
+    height: 2px;
+  }
+
+  .list-image{
+    border: 5px solid green;
+  }
+
+  .GallerySliderVideo{
+    border: 5px solid green;
+    margin: 0 auto;
+    width: 22em;
+  }
+
+  li{
+    border: 5px solid blue;
+  }
+
+
+  .logo {
+    height: 55px;
+  }
+
+  .container{
+    border: 1px solid blue;
+    display: flex;
+  }
+
+  .list-container{
+    border: 5px solid red;
+    margin-bottom: 1em;
+    float:left;
+    display:inline;
+    width: 100%;
+  }
 }

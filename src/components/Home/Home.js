@@ -45,69 +45,69 @@ class Home extends Component {
 
 		this.setState({
 			currentVideoInfo : {
-		 "title": "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
-		 "description": "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos",
-		 "airdate": "2016-08-11T22:30:00Z",
-		 "mediaId": "P4R_3ErslAOQ",
-		 "permalink": "http://now.telemundo.com/video/share/3083345",
-		 "vChipRating": "tv-14",
-		 "seasonNumber": "2016",
-		 "keywords": [
-		  "Telemundo,Noticias Telemundo,Información,profesionales,msn,\"Abrazos no muros\",reencuentro frontera México-EEUU"
-		 ],
-		 "image": "http://stage.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2016/08/11/amor-invade-frontera-de-mexico-y-eeuu.jpg"
-		}});
-		(lsVideoList ) ? lsBoolean=true : lsBoolean = false;
-	}
+				"title": "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
+				"description": "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos",
+				"airdate": "2016-08-11T22:30:00Z",
+				"mediaId": "P4R_3ErslAOQ",
+				"permalink": "http://now.telemundo.com/video/share/3083345",
+				"vChipRating": "tv-14",
+				"seasonNumber": "2016",
+				"keywords": [
+					"Telemundo,Noticias Telemundo,Información,profesionales,msn,\"Abrazos no muros\",reencuentro frontera México-EEUU"
+				],
+				"image": "http://stage.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2016/08/11/amor-invade-frontera-de-mexico-y-eeuu.jpg"
+			}});
+			(lsVideoList ) ? lsBoolean=true : lsBoolean = false;
+		}
 
-	// componentWillUpdate(){
-	// 	if(recommendedList){
-	// 		this.setState({
-	// 			usersLSsearches: recommendedList
-	// 		})
-	// 	}
-	// }
+		// componentWillUpdate(){
+		// 	if(recommendedList){
+		// 		this.setState({
+		// 			usersLSsearches: recommendedList
+		// 		})
+		// 	}
+		// }
 
-	componentDidMount(){
-		console.log(this.state);
-	}
+		componentDidMount(){
+			console.log(this.state);
+		}
 
-	returnIfMatched(mediaId){
-		let matched = false;
-		if (lsBoolean ) {
-			lsVideoList.forEach((val)=>{
-				matched = false;
-				if(val === mediaId) {
-					matched = true;
+		returnIfMatched(mediaId){
+			let matched = false;
+			if (lsBoolean ) {
+				lsVideoList.forEach((val)=>{
+					matched = false;
+					if(val === mediaId) {
+						matched = true;
+					}
+				})
+				if (matched) {
+					console.log("return if matched =========");
+					return <p>one matched</p>
 				}
-			})
-			if (matched) {
-				console.log("return if matched =========");
-				return <p>one matched</p>
 			}
 		}
-	}
 
-	handleVidClick(videoInfo) {
-		this.setState({
-			currentVideoInfo: videoInfo
-		});
-		// const currentState = this.state;
-		videosClicked.unshift(videoInfo);
-		videosClicked = Array.from(new Set(videosClicked)).slice(0,2);
-		localStorage.setItem('videosClicked', JSON.stringify(videosClicked));
-		this.setState({
-			usersLSvideosClicked: videosClicked
-		});
-	}
+		handleVidClick(videoInfo) {
+			this.setState({
+				currentVideoInfo: videoInfo
+			});
+			// const currentState = this.state;
+			videosClicked.unshift(videoInfo);
+			videosClicked = Array.from(new Set(videosClicked)).slice(0,2);
+			localStorage.setItem('videosClicked', JSON.stringify(videosClicked));
+			this.setState({
+				usersLSvideosClicked: videosClicked
+			});
+		}
 
 
-	compareSearchesToKeywords(data){
+		compareSearchesToKeywords(data){
 
-		const searchedWords =  this.state.usersLSsearches;
-		data.map((val, ind)=>{
-			// console.log("val");
-			// console.log(val);
+			const searchedWords =  this.state.usersLSsearches;
+			data.map((val, ind)=>{
+				// console.log("val");
+				// console.log(val);
 				if (val.keywords ){
 					val.keywords.forEach((val2)=>{
 						// console.log("val2");
@@ -139,174 +139,180 @@ class Home extends Component {
 			// console.log(recommendedList);
 			// return recommendedList
 
-	}
+		}
 
 
-	Item(videoInfo) {
-  return (
-		<ul onClick={(e)=> this.handleVidClick(videoInfo)} key={JSON.stringify(videoInfo)} >
-			<li key={videoInfo.title}>{videoInfo.title}</li>
-			<img alt= {videoInfo.title} key= {videoInfo.image} src= {videoInfo.image} className="list-image"></img>
-		</ul>
-	);
-}
+		Item(videoInfo) {
+			return (
+				<ul onClick={(e)=> this.handleVidClick(videoInfo)} key={JSON.stringify(videoInfo)} >
+					<li key={videoInfo.title}>{videoInfo.title}</li>
+					<img alt= {videoInfo.title} key= {videoInfo.image} src= {videoInfo.image} className="list-image"></img>
+				</ul>
+			);
+		}
 
-	recentlyViewed(videoInfo){
-		return (
-			<ul key={videoInfo.permalink}>
-				{
-						<li  onClick={(e) => this.handleVidClick(videoInfo) }>
-						 <img alt={videoInfo.title} src= {videoInfo.image} height="100" width="100"></img>
-					 </li>
-					}
-			</ul>
-		)
-	}
-
-	render() {
-	return (
-		<div>
-			<MiniDrawer>
-				<ReactiveBase
-					app="YouMundo"
-					credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b"
-				>
-					<DataSearch
-						className="search-bar"
-						width="80%"
-						componentId="SearchSensor"
-						dataField={["keywords", "title", "description"]}
-						onValueSelected={function(value) {
-								lsSearchedList.push(value);
-								lsSearchedList = Array.from(new Set(lsSearchedList));
-								localStorage.setItem('userSearches', JSON.stringify(lsSearchedList));
-								this.setState({usersLSsearches: lsSearchedList});
-						}.bind(this)} />
-					<Grid container spacing={16}>
-						<Grid item sm={6} >
-							<ReactMpxPlayer
-								 className="GallerySliderVideo"
-								 width="100%"
-								 height="400px"
-								 style={{marginTop: '10px'}}
-								 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideoInfo.mediaId}?autoPlay=true&mute=false`}
-								 allowFullScreen
-								 onLoad={() => {
-									 console.log('Player is Loaded!')
-								 }}
-								 onPdkControllerInstalled={pdkController => {
-									 pdkController.addEventListener('OnMediaStart', () => {
-										 console.log('Media has started!');
-										 // Pause the video after 10 seconds of playing
-										 setTimeout(() => pdkController.pause(true), 10000);
-									 })
-								 }}
-							 />
-						</Grid>
-					{this.state.usersLSvideosClicked &&
-						<Grid item sm={6} >
-							<h3>Recently Watched</h3>
-							<Grid container spacing={16} >
-								{this.state.usersLSvideosClicked.map((video) => {
-									return(
-										<Grid key={video.title} item xs={6} onClick={(e) => {this.handleVidClick(video)}}>
-											<ListItem button><SimpleMediaCard title={video.title} image={video.image} /></ListItem>
-										</Grid>
-									)
-								})}
-							</Grid>
-						</Grid>
-					}
-					</Grid>
+		recentlyViewed(videoInfo){
+			return (
+				<ul key={videoInfo.permalink}>
 					{
-						<ReactiveList
-							className="video-list"
-							componentId="SearchResult"
-							dataField="title"
-							loader="Loading Results.."
-							size={120}
-							onAllData={
-								(res) => {
+						<li  onClick={(e) => this.handleVidClick(videoInfo) }>
+							<img alt={videoInfo.title} src= {videoInfo.image} height="100" width="100"></img>
+						</li>
+					}
+				</ul>
+			)
+		}
 
-									return(
+		render() {
+			return (
+				<div>
+					<MiniDrawer>
+						<ReactiveBase
+							app="YouMundo"
+							credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b"
+							>
+							<DataSearch
+								className="search-bar"
+								width="80%"
+								componentId="SearchSensor"
+								dataField={["keywords", "title", "description"]}
+								onValueSelected={function(value) {
+									lsSearchedList.push(value);
+									lsSearchedList = Array.from(new Set(lsSearchedList));
+									localStorage.setItem('userSearches', JSON.stringify(lsSearchedList));
+									this.setState({usersLSsearches: lsSearchedList});
+								}.bind(this)} />
+								<Grid container spacing={16}>
+									<Grid item sm={6} >
+										<ReactMpxPlayer
+											className="GallerySliderVideo"
+											width="100%"
+											height="400px"
+											style={{marginTop: '10px'}}
+											src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideoInfo.mediaId}?autoPlay=true&mute=false`}
+											allowFullScreen
+											onLoad={() => {
+												console.log('Player is Loaded!')
+											}}
+											onPdkControllerInstalled={pdkController => {
+												pdkController.addEventListener('OnMediaStart', () => {
+													console.log('Media has started!');
+													// Pause the video after 10 seconds of playing
+													setTimeout(() => pdkController.pause(true), 10000);
+												})
+											}}
+											/>
+									</Grid>
+									{this.state.usersLSvideosClicked &&
+										<Grid item sm={6} >
+											<h3 className="headline">Recently Watched</h3>
+											<Grid container spacing={14} >
+												{this.state.usersLSvideosClicked.map((video) => {
+													return(
+														<div className = "container">
+															<div className = "list-container">
+																<Grid item xs={6} onClick={(e) => {this.handleVidClick(video)}}>
+																	<ListItem id="list-item" button><SimpleMediaCard title={video.title} image={video.image} /></ListItem>
+																</Grid>
+															</div>
+														</div>
+													)
+												})}
+											</Grid>
+										</Grid>
+									}
+								</Grid>
+								{
+									<ReactiveList
+										className="video-list"
+										componentId="SearchResult"
+										dataField="title"
+										loader="Loading Results.."
+										size={120}
+										onAllData={
+											(res) => {
 
-										<Grid container spacing={24}>
-											{ this.compareSearchesToKeywords(res)}
-											{
-												res.map( (results, ind) => {
-													if(ind < 4){
-														return(
-														<Grid
-															key={results.mediaId}
-															item xs={6}
-															sm={3}
-															onClick={(e) => {this.handleVidClick(results)}}
-														>
-															{
-															<ListItem button>
-																<SimpleMediaCard
-																	title={results.title}
-																	image={results.image}
-																/>
-															</ListItem>
+												return(
+
+													<Grid container spacing={24}>
+														{ this.compareSearchesToKeywords(res)}
+														{
+															res.map( (results, ind) => {
+																if(ind < 4){
+																	return(
+																		<div className="container2">
+																		<Grid
+																			key={results.mediaId}
+																			item xs={6}
+																			sm={3}
+																			onClick={(e) => {this.handleVidClick(results)}}
+																			>
+																			{
+																				<ListItem button>
+																					<SimpleMediaCard
+																						title={results.title}
+																						image={results.image}
+																						/>
+																				</ListItem>
+																			}
+																		</Grid>
+																	</div>
+
+																	)}
+																	return ind
+																})
 															}
+															{this.state.usersLSsearches &&
+																<div>
+																	<h1>Recommended</h1>
+																	<Grid container spacing={16}>
+
+
+																		{
+																			recommendedList.map((object, ind) => {
+																				const parsedObject = JSON.parse(object);
+																				return (
+																					<Grid
+																						key={parsedObject.mediaId}
+																						item xs={3}
+
+																						onClick={(e) => {this.handleVidClick(parsedObject)}}
+																						>
+																						<ListItem button><SimpleMediaCard title={parsedObject.title} image={parsedObject.image} /></ListItem>
+																					</Grid>
+
+																				)
+
+																			}
+																		)}
+
+																	</Grid>
+																</div>
+
+															}
+
 														</Grid>
 
-													)}
-													return ind
-												})
+													)
+												}
 											}
-											{this.state.usersLSsearches &&
-												<div>
-													<h1>Recommended</h1>
-												<Grid container spacing={16}>
 
-
-														{
-							 							recommendedList.map((object, ind) => {
-															const parsedObject = JSON.parse(object);
-															return (
-																<Grid
-																	key={parsedObject.mediaId}
-																	item xs={3}
-
-																	onClick={(e) => {this.handleVidClick(parsedObject)}}
-																>
-																	<ListItem button><SimpleMediaCard title={parsedObject.title} image={parsedObject.image} /></ListItem>
-																</Grid>
-
-															)
-
-														}
-													)}
-
-												</Grid>
-											</div>
-
+											react={{ and: ["SearchSensor"] }}
+											/>
 									}
+								</ReactiveBase>
+							</MiniDrawer>
+						</div>
+					);
+				}
+			}
 
-										</Grid>
-
-									)
-								}
-							}
-
-							react={{ and: ["SearchSensor"] }}
-						/>
-					}
-				</ReactiveBase>
-			</MiniDrawer>
-		</div>
-	);
-}
-}
-
-// Home.propTypes = {
-// 	handleVidClick: PropTypes.func.isRequired,
-// 	app: PropTypes.shape({
-// 		currentVideo: PropTypes.string.isRequired
-// 	})
-// }
+			// Home.propTypes = {
+			// 	handleVidClick: PropTypes.func.isRequired,
+			// 	app: PropTypes.shape({
+			// 		currentVideo: PropTypes.string.isRequired
+			// 	})
+			// }
 
 
-export default Home;
+			export default Home;
