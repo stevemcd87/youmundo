@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { ReactiveBase,DataSearch, ReactiveList } from '@appbaseio/reactivesearch';
 import ReactMpxPlayer from '@telemundo/react-mpx-player';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import MiniDrawer from '../MiniDrawer.js'
-// import SimpleMediaCard from '../SimpleMediaCard.js'
-// import Grid from '@material-ui/core/Grid';
+import SimpleMediaCard from '../SimpleMediaCard.js'
+import Grid from '@material-ui/core/Grid';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
-// import PropTypes from 'prop-types';
+
+
+
+
 
 
 let recommendedList = [];
@@ -86,8 +92,8 @@ class Home extends Component {
 			currentVideoInfo: videoInfo
 		});
 		const currentState = this.state;
-		videosClicked.push(currentState.currentVideoInfo);
-		videosClicked = Array.from(new Set(videosClicked));
+		videosClicked.unshift(videoInfo);
+		videosClicked = Array.from(new Set(videosClicked)).slice(0,2);
 		localStorage.setItem('videosClicked', JSON.stringify(videosClicked));
 		this.setState({
 			usersLSvideosClicked: videosClicked
@@ -155,116 +161,106 @@ class Home extends Component {
 	}
 
 	render() {
-		return (
-
+	return (
+		<div>
 			<MiniDrawer>
-
-			<ReactiveBase
-				app="YouMundo"
-				credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b">
-				<DataSearch
-					className="search-bar"
-					width="80%"
-				  componentId="SearchSensor"
-				  dataField={["keywords", "title", "description"]}
-					onValueSelected={function(value) {
-							lsSearchedList.push(value);
-							lsSearchedList = Array.from(new Set(lsSearchedList));
-							localStorage.setItem('userSearches', JSON.stringify(lsSearchedList));
-							this.setState({usersLSsearches: lsSearchedList});
-							console.log(lsSearchedList);
-							console.log("lsSearchedList================");
-							// this.handleSearch(recommendedList);
-	 					}.bind(this)
- 					}
-				/>
-				<ReactMpxPlayer
-					 className="GallerySliderVideo"
-					 height="80%"
-					 width="80%"
-					 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideoInfo.mediaId}?autoPlay=true&mute=false`}
-					 allowFullScreen
-					 onLoad={() => {
-						 console.log('Player is Loaded!')
-					 }}
-					 onPdkControllerInstalled={pdkController => {
-						 pdkController.addEventListener('OnMediaStart', () => {
-							 console.log('Media has started!');
-							 // Pause the video after 10 seconds of playing
-							 setTimeout(() => pdkController.pause(true), 10000);
-						 })
-					 }}
-				 />
-
-				<ReactiveList
-					className="video-list"
-				  componentId="SearchResult"
-				  dataField="title"
-				  loader="Loading Results.."
-					size = {1000}
-				  onAllData={
-						(res) =>
-						 <div className= "body">
-							 {								this.compareSearchesToKeywords(res)}
-
-							 <div className= "regular">
-								 <h1>Regular</h1>
-								 <div className= "list">
-									 {res.map((object, ind) => {
-										 if(ind < 5) {
-											 return (
-												 this.Item(object)
-											 )
-										 }
-									 }
-									)}
-								</div>
-							 </div>
-								{this.state.usersLSvideosClicked &&
-								 <div className= "recently-viewed">
-									 <h1>Recently Viewed</h1>
-									 <div className="list">
-										 { this.state.usersLSvideosClicked.map((object, ind) => {
-											 if(ind < 5) {
-												 return (
-													 this.recentlyViewed(object)
-												 )
-											 }
-										 }
-									 )}
-									 </div>
-								 </div>
-								}
-								{this.state.usersLSsearches &&								<div className= "recommended-list">
-										<h1>Recommended</h1>
-
-										<div className="list">
+				<ReactiveBase
+					app="YouMundo"
+					credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b"
+				>
+					<DataSearch
+						className="search-bar"
+						width="80%"
+						componentId="SearchSensor"
+						dataField={["keywords", "title", "description"]}
+						onValueSelected={function(value) {
+								lsSearchedList.push(value);
+								lsSearchedList = Array.from(new Set(lsSearchedList));
+								localStorage.setItem('userSearches', JSON.stringify(lsSearchedList));
+								this.setState({usersLSsearches: lsSearchedList});
+						}.bind(this)} />
+					<Grid container spacing={16}>
+						<Grid item sm={6} >
+							<ReactMpxPlayer
+								 className="GallerySliderVideo"
+								 width="100%"
+								 height="400px"
+								 style={{marginTop: '10px'}}
+								 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideoInfo.mediaId}?autoPlay=true&mute=false`}
+								 allowFullScreen
+								 onLoad={() => {
+									 console.log('Player is Loaded!')
+								 }}
+								 onPdkControllerInstalled={pdkController => {
+									 pdkController.addEventListener('OnMediaStart', () => {
+										 console.log('Media has started!');
+										 // Pause the video after 10 seconds of playing
+										 setTimeout(() => pdkController.pause(true), 10000);
+									 })
+								 }}
+							 />
+						</Grid>
+					{this.state.usersLSvideosClicked &&
+						<Grid item sm={6} >
+							<h3>Recently Watched</h3>
+							<Grid container spacing={16} >
+								{this.state.usersLSvideosClicked.map((video) => {
+									return(
+										<Grid item xs={6} onClick={(e) => {this.handleVidClick(video)}}>
+											<ListItem button><SimpleMediaCard title={video.title} image={video.image} /></ListItem>
+										</Grid>
+									)
+								})}
+							</Grid>
+						</Grid>
+					}
+					</Grid>
+					{
+						<ReactiveList
+							className="video-list"
+							componentId="SearchResult"
+							dataField="title"
+							loader="Loading Results.."
+							size={8}
+							pagination={true}
+							pages={5}
+							onAllData={
+								(res) => {
+									return(
+										<Grid container spacing={16}>
 											{
-				 							recommendedList.map((object, ind) => {
-												const parsedObject = JSON.parse(object);
-												console.log(parsedObject);
-												return (
-													this.recentlyViewed(parsedObject)
-												)
-
+												res.map( (results) => {
+													return(
+														<Grid
+															key={results.mediaId}
+															item xs={6}
+															sm={3}
+															onClick={(e) => {this.handleVidClick(results)}}
+														>
+															{
+															<ListItem button>
+																<SimpleMediaCard
+																	title={results.title}
+																	image={results.image}
+																/>
+															</ListItem>
+															}
+														</Grid>
+													)
+												})
 											}
-										)}
-										</div>
-									</div>
-
-						}
-
-						 </div> //END OF BODY
-
-						}
-				  react={{
-				    and: ["SearchSensor"]
-				  }}
-				/>
-			</ReactiveBase>
+										</Grid>
+									)
+								}
+							}
+							react={{ and: ["SearchSensor"] }}
+						/>
+					}
+				</ReactiveBase>
 			</MiniDrawer>
-		) // End of render return;
-	}
+		</div>
+	);
+}
 }
 
 // Home.propTypes = {

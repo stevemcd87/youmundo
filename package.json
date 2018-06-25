@@ -10,6 +10,7 @@
     "auth0-js": "^9.6.1",
     "history": "^4.7.2",
     "material-design-icons": "^3.0.1",
+    "material-ui-scrolling-techniques": "^0.2.0",
     "mdbootstrap": "^4.5.5",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
