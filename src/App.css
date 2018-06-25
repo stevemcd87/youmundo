@@ -7,22 +7,31 @@ ul {
 }
 
 
-
-
- .profile-area{
-
-    /* white-space:nowrap;
-    overflow-x:auto; */
-    display: flex;
-
-
+.btn-margin {
+  display: flex;
+  border-radius: 40px;
+  padding: .3rem 1rem;
+  align-items:  center;
+  justify-content: space-around;
+  min-width: 130px;
 }
 
+
 .profile-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding-left: 1rem;
+  margin-right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  margin: 0 auto;
+
+}
+.MuiToolbar-root-52 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.current-title{
+  text-align: center;
 }
 /*
 .box{

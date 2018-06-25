@@ -185,6 +185,7 @@ class Home extends Component {
 					/>
 					<Grid container spacing={16}>
 						<Grid item sm={6} >
+
 							<ReactMpxPlayer
 								 className="GallerySliderVideo"
 								 width="100%"
@@ -203,6 +204,7 @@ class Home extends Component {
 									 })
 								 }}
 							 />
+							 <strong className="current-title">{this.state.currentVideoInfo.title}</strong>
 						</Grid>
 					{this.state.usersLSvideosClicked &&
 						<Grid item sm={6} >
