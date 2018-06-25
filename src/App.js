@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <div>
         <Navbar fluid>
-          <Navbar.Header>
+          <Navbar.Header className="navbar">
             {/* <Navbar.Brand>
               <a href="#">Auth0 - React</a>
             </Navbar.Brand>
@@ -57,14 +57,19 @@ class App extends Component {
                     className="btn-margin"
                     onClick={this.logout.bind(this)}
                   >
+                    <Profile auth={this.props.auth} {...this.props} />
                       <p>{console.log(this.props.auth)}</p>
                       <p>{console.log(this.props.auth.auth0)}</p>
                     Log Out
-                    <Profile auth={this.props.auth} {...this.props} />
+
                   </Button>
+
+
                 )
             }
+
           </Navbar.Header>
+
         </Navbar>
       </div>
     )

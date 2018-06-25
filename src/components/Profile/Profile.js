@@ -21,7 +21,7 @@ class Profile extends Component {
     return (
       <div className="container">
         <div className="profile-area">
-          <span>{profile.name}</span>
+          {/* <span>{profile.name}</span> */}
           <Panel header="Profile">
             <img className="profile-img" src={profile.picture} alt="profile" />
             {/* <div>
