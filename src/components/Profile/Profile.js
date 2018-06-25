@@ -23,7 +23,7 @@ class Profile extends Component {
         <div className="profile-area">
           <h1>{profile.name}</h1>
           <Panel header="Profile">
-            <img src={profile.picture} alt="profile" />
+            <img style={{width: '30px'}} src={profile.picture} alt="profile" />
             {/* <div>
               <ControlLabel><Glyphicon glyph="user" /> Nickname</ControlLabel>
               <h3>{profile.nickname}</h3>

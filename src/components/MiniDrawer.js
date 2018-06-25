@@ -42,6 +42,7 @@ const styles = theme => ({
   },
   appBar: {
     position: 'absolute',
+    backgroundColor: 'red',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -149,20 +150,20 @@ class PersistentDrawer extends React.Component {
         <Divider />
         <List>
           <div>
-<<<<<<< HEAD
-            <ListItem button>
-=======
-            <ListItem button >
->>>>>>> fizzy
+
+            <ListItem button onClick={ (e) => {this.props.invalidateSearch()}}>
               <ListItemIcon>
-                <InboxIcon />
+                <i className="material-icons">person</i>
               </ListItemIcon>
-              <ListItemText primary="Recommendations" />
+              <h3 style={{fontFamily: 'Helvetica', color: 'rgba(0, 0, 0, 0.70)'}}>Recommended</h3>
             </ListItem>
           </div>
         </List>
         <Divider />
         <List>{otherMailFolderListItems}</List>
+        <Divider />
+        <List>{mailFolderListItems}</List>
+
       </Drawer>
     );
 
@@ -194,11 +195,7 @@ class PersistentDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap>
-<<<<<<< HEAD
-                <img className="logo" src="./img/logo.png" />
-=======
                 YouMundo
->>>>>>> fizzy
               </Typography>
             </Toolbar>
           </AppBar>

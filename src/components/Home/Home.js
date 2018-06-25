@@ -30,7 +30,9 @@ class Home extends Component {
 			currentVideoInfo: {},
 			usersLSvideosClicked: [],
 			usersLSsearches:[],
-			usersRecommendedList: []
+			usersRecommendedList: [],
+			isSearching: true,
+      searchTerm: ''
 		}
 	}
 
@@ -59,13 +61,9 @@ class Home extends Component {
 		(lsVideoList ) ? lsBoolean=true : lsBoolean = false;
 	}
 
-	// componentWillUpdate(){
-	// 	if(recommendedList){
-	// 		this.setState({
-	// 			usersLSsearches: recommendedList
-	// 		})
-	// 	}
-	// }
+	invalidateSearch(){
+    this.setState({isSearching: false, searchTerm: ''});
+  }
 
 	componentDidMount(){
 		console.log(this.state);
@@ -163,7 +161,7 @@ class Home extends Component {
 	render() {
 	return (
 		<div>
-			<MiniDrawer>
+			<MiniDrawer invalidateSearch={this.invalidateSearch.bind(this)}>
 				<ReactiveBase
 					app="YouMundo"
 					credentials="6Ook2nnnU:1e9d454b-f3d2-4b8c-96f2-e25a0f84969b"
@@ -178,7 +176,10 @@ class Home extends Component {
 								lsSearchedList = Array.from(new Set(lsSearchedList));
 								localStorage.setItem('userSearches', JSON.stringify(lsSearchedList));
 								this.setState({usersLSsearches: lsSearchedList});
-						}.bind(this)} />
+						}.bind(this)}
+						onKeyUp={ (e) => { this.setState({isSearching: true, searchTerm: e.target.value}) }}
+	          value={this.state.searchTerm}
+					/>
 					<Grid container spacing={16}>
 						<Grid item sm={6} >
 							<ReactMpxPlayer
@@ -202,7 +203,7 @@ class Home extends Component {
 						</Grid>
 					{this.state.usersLSvideosClicked &&
 						<Grid item sm={6} >
-							<h3>Recently Watched</h3>
+							<h2>Recently Watched</h2>
 							<Grid container spacing={16} >
 								{this.state.usersLSvideosClicked.map((video) => {
 									return(
@@ -221,7 +222,9 @@ class Home extends Component {
 							componentId="SearchResult"
 							dataField="title"
 							loader="Loading Results.."
-							size={120}
+							size={8}
+							pagination={this.state.isSearching}
+							pages={5}
 							onAllData={
 								(res) => {
 
@@ -229,9 +232,8 @@ class Home extends Component {
 
 										<Grid container spacing={24}>
 											{ this.compareSearchesToKeywords(res)}
-											{
+											{ this.state.isSearching &&
 												res.map( (results, ind) => {
-													if(ind < 4){
 														return(
 														<Grid
 															key={results.mediaId}
@@ -248,13 +250,13 @@ class Home extends Component {
 															</ListItem>
 															}
 														</Grid>
-													)}
+													)
 
 												})
 											}
-											{this.state.usersLSsearches &&
+											{ !this.state.isSearching &&
 												<div>
-													<h1>Recommended</h1>
+													<h2>Recommended</h2>
 												<Grid container spacing={16}>
 
 
@@ -265,10 +267,9 @@ class Home extends Component {
 																<Grid
 																	key={parsedObject.mediaId}
 																	item xs={3}
-
 																	onClick={(e) => {this.handleVidClick(parsedObject)}}
 																>
-																	<ListItem button><SimpleMediaCard title={parsedObject.title} image={parsedObject.image} /></ListItem>
+																	<ListItem button><SimpleMediaCard title={parsedObject.title} image={parsedObject.image} style={{paddingRight: '100px'}} /></ListItem>
 																</Grid>
 
 															)

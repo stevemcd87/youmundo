@@ -9,43 +9,17 @@ import SendIcon from '@material-ui/icons/Send';
 import MailIcon from '@material-ui/icons/Mail';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ReportIcon from '@material-ui/icons/Report';
+import Typography from '@material-ui/core/Typography';
 
-export const mailFolderListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <InboxIcon />
-      </ListItemIcon>
-      <ListItemText primary="Inbox" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <StarIcon />
-      </ListItemIcon>
-      <ListItemText primary="Starred" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <SendIcon />
-      </ListItemIcon>
-      <ListItemText primary="Send mail" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DraftsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Drafts" />
-    </ListItem>
-  </div>
-);
+
 
 export const otherMailFolderListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
-        <MailIcon />
+        <i className="material-icons"> trending_up</i>
       </ListItemIcon>
-      <ListItemText primary="All mail" />
+      <h3 style={{fontFamily: 'Helvetica', color: 'rgba(0, 0, 0, 0.70)'}}>Now Trending</h3>
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -59,5 +33,39 @@ export const otherMailFolderListItems = (
       </ListItemIcon>
       <ListItemText primary="Spam" />
     </ListItem>
+  </div>
+);
+
+export const mailFolderListItems = (
+  <div>
+    <ListItem button>
+      <ListItemIcon>
+        <i className="material-icons" style={{fontSize: '30px'}}>stay_current_portrait</i>
+      </ListItemIcon>
+      <h3 style={{fontFamily: 'Helvetica', color: 'rgba(0, 0, 0, 0.70)'}}>Get Updates</h3>
+    </ListItem>
+    <ul>
+      <li>
+        <ListItem button>
+          <ListItemIcon>
+            <a href="https://es-la.facebook.com/Telemundo/" target="_blank"><i className="fab fa-facebook-f" style={{fontSize: '30px'}}></i></a>
+          </ListItemIcon>
+        </ListItem>
+      </li>
+      <li>
+        <ListItem button>
+          <ListItemIcon>
+            <a href="https://twitter.com/telemundo?lang=en" target="_blank"><i className="fab fa-twitter" style={{fontSize: '30px'}}></i></a>
+          </ListItemIcon>
+        </ListItem>
+      </li>
+      <li>
+        <ListItem button>
+          <ListItemIcon>
+            <a href="https://www.instagram.com/telemundo/?hl=en" target="_blank"><i className="fab fa-instagram" style={{fontSize: '30px'}}></i></a>
+          </ListItemIcon>
+        </ListItem>
+      </li>
+    </ul>
   </div>
 );
