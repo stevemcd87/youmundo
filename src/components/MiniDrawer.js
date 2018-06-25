@@ -6,25 +6,25 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import MenuItem from '@material-ui/core/MenuItem';
+// import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+import {  otherMailFolderListItems } from './tileData';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import StarIcon from '@material-ui/icons/Star';
-import SendIcon from '@material-ui/icons/Send';
-import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
+// import DraftsIcon from '@material-ui/icons/Drafts';
+// import StarIcon from '@material-ui/icons/Star';
+// import SendIcon from '@material-ui/icons/Send';
+// import MailIcon from '@material-ui/icons/Mail';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import ReportIcon from '@material-ui/icons/Report';
 
 const drawerWidth = 240;
 
@@ -149,11 +149,7 @@ class PersistentDrawer extends React.Component {
         <Divider />
         <List>
           <div>
-<<<<<<< HEAD
-            <ListItem button>
-=======
             <ListItem button >
->>>>>>> fizzy
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
@@ -194,11 +190,11 @@ class PersistentDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap>
-<<<<<<< HEAD
+{/* <<<<<<< HEAD
                 <img className="logo" src="./img/logo.png" />
-=======
+======= */}
                 YouMundo
->>>>>>> fizzy
+{/* >>>>>>> fizzy */}
               </Typography>
             </Toolbar>
           </AppBar>
@@ -209,7 +205,7 @@ class PersistentDrawer extends React.Component {
               [classes[`contentShift-${anchor}`]]: open,
             })}
           >
-            <div className={classes.drawerHeader} />
+            <div  className={classes.drawerHeader} />
             {this.props.children}
           </main>
           {after}

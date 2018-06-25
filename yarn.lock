@@ -3460,6 +3460,10 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
+hoist-non-react-statics@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
+
 hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.4"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.4.tgz#fc3b1ac05d2ae3abedec84eba846511b0d4fcc4f"
@@ -4711,6 +4715,10 @@ lodash.uniq@^4.5.0:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
+lodash@^3.0.0:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
+
 loglevel@^1.4.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.1.tgz#e0fc95133b6ef276cdc8887cdaf24aa6f156f8fa"
@@ -4780,6 +4788,12 @@ material-design-icons@^3.0.1:
 material-responsive-grid@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/material-responsive-grid/-/material-responsive-grid-1.1.1.tgz#f31a1657bffa2d756cb279179fc846d1e44f03f2"
+
+material-ui-scrolling-techniques@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/material-ui-scrolling-techniques/-/material-ui-scrolling-techniques-0.2.0.tgz#2ed90d20681a53308d1a6db7082924f358a4d097"
+  dependencies:
+    recompose "^0.14.5"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -6364,6 +6378,13 @@ readdirp@^2.0.0:
     minimatch "^3.0.2"
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
+
+recompose@^0.14.5:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.14.5.tgz#33a0aecfb0215d95318a173508dbe1fe53a395be"
+  dependencies:
+    hoist-non-react-statics "^1.0.0"
+    lodash "^3.0.0"
 
 "recompose@^0.26.0 || ^0.27.0", recompose@^0.27.0:
   version "0.27.1"
