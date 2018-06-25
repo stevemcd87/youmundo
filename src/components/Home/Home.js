@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { ReactiveBase,DataSearch, ReactiveList } from '@appbaseio/reactivesearch';
 import ReactMpxPlayer from '@telemundo/react-mpx-player';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import MiniDrawer from '../MiniDrawer.js'
 import SimpleMediaCard from '../SimpleMediaCard.js'
 import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
+// import ListItemText from '@material-ui/core/ListItemText';
 
 
 
@@ -45,7 +45,8 @@ class Home extends Component {
 		})
 		// console.log(this.state);
 
-		this.state.currentVideoInfo = {
+		this.setState({
+			currentVideoInfo : {
 		 "title": "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
 		 "description": "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos",
 		 "airdate": "2016-08-11T22:30:00Z",
@@ -57,7 +58,7 @@ class Home extends Component {
 		  "Telemundo,Noticias Telemundo,Información,profesionales,msn,\"Abrazos no muros\",reencuentro frontera México-EEUU"
 		 ],
 		 "image": "http://stage.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2016/08/11/amor-invade-frontera-de-mexico-y-eeuu.jpg"
-		};
+		}});
 		(lsVideoList ) ? lsBoolean=true : lsBoolean = false;
 	}
 
@@ -89,7 +90,7 @@ class Home extends Component {
 		this.setState({
 			currentVideoInfo: videoInfo
 		});
-		const currentState = this.state;
+		// const currentState = this.state;
 		videosClicked.unshift(videoInfo);
 		videosClicked = Array.from(new Set(videosClicked)).slice(0,2);
 		localStorage.setItem('videosClicked', JSON.stringify(videosClicked));
@@ -100,6 +101,7 @@ class Home extends Component {
 
 
 	compareSearchesToKeywords(data){
+
 		const searchedWords =  this.state.usersLSsearches;
 		data.map((val, ind)=>{
 			// console.log("val");
@@ -117,7 +119,7 @@ class Home extends Component {
 									recommendedList.push(valString);
 									recommendedList = Array.from(new Set(recommendedList));
 									// recommendedList = JSON.parse(recommendedList);
-									console.log(recommendedList);
+									// console.log(recommendedList);
 									// return recommendedList;
 									// this.setState({
 									// 	usersRecommendedList: recommendedList
@@ -127,8 +129,9 @@ class Home extends Component {
 						}
 					})
 				} else {
-					// console.error(val);
+					// console.log(val);
 				}
+				return recommendedList
 			})
 			// console.log("recommendedList=============");
 			// console.log(recommendedList);
@@ -151,7 +154,7 @@ class Home extends Component {
 			<ul key={videoInfo.permalink}>
 				{
 						<li  onClick={(e) => this.handleVidClick(videoInfo) }>
-						 <img src= {videoInfo.image} height="100" width="100"></img>
+						 <img alt={videoInfo.title} src= {videoInfo.image} height="100" width="100"></img>
 					 </li>
 					}
 			</ul>
@@ -207,7 +210,7 @@ class Home extends Component {
 							<Grid container spacing={16} >
 								{this.state.usersLSvideosClicked.map((video) => {
 									return(
-										<Grid item xs={6} onClick={(e) => {this.handleVidClick(video)}}>
+										<Grid key={video.title} item xs={6} onClick={(e) => {this.handleVidClick(video)}}>
 											<ListItem button><SimpleMediaCard title={video.title} image={video.image} /></ListItem>
 										</Grid>
 									)
@@ -252,36 +255,32 @@ class Home extends Component {
 														</Grid>
 													)
 
+													// )}
+													// return ind
 												})
 											}
 											{ !this.state.isSearching &&
 												<div>
 													<h2>Recommended</h2>
 												<Grid container spacing={16}>
-
-
 														{
 							 							recommendedList.map((object, ind) => {
 															const parsedObject = JSON.parse(object);
 															return (
 																<Grid
 																	key={parsedObject.mediaId}
-																	item xs={3}
+																	item xs={6}
+																	sm={3}
 																	onClick={(e) => {this.handleVidClick(parsedObject)}}
 																>
 																	<ListItem button><SimpleMediaCard title={parsedObject.title} image={parsedObject.image} style={{paddingRight: '100px'}} /></ListItem>
 																</Grid>
-
 															)
-
 														}
 													)}
-
 												</Grid>
 											</div>
-
 									}
-
 										</Grid>
 
 									)
@@ -297,13 +296,5 @@ class Home extends Component {
 	);
 }
 }
-
-// Home.propTypes = {
-// 	handleVidClick: PropTypes.func.isRequired,
-// 	app: PropTypes.shape({
-// 		currentVideo: PropTypes.string.isRequired
-// 	})
-// }
-
 
 export default Home;
