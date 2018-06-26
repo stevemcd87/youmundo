@@ -10,6 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 
+
 let recommendedList = [];
 let videosClicked = [];
 let lsBoolean;
@@ -149,7 +150,7 @@ class Home extends Component {
 			<ul key={videoInfo.permalink}>
 				{
 						<li onClick={(e) => this.handleVidClick(videoInfo) }>
-						 <img src= {videoInfo.image} height="100" width="100"></img>
+						 <img src= {videoInfo.image} height="0" width="0"></img>
 					 </li>
 					}
 			</ul>
@@ -175,12 +176,12 @@ class Home extends Component {
 								localStorage.setItem('userSearches', JSON.stringify(lsSearchedList));
 								this.setState({usersLSsearches: lsSearchedList});
 						}.bind(this)} />
+
 					<Grid container spacing={16}>
 						<Grid item sm={6} >
-							<h3 className="headline">Currently Playing</h3>
+								<h3 className="headline">Recently Watched</h3>
 							<ReactMpxPlayer
 								 className="GallerySliderVideo"
-								 width="310px"
 								 height="300px"
 								 style={{marginTop: '10px'}}
 								 src={`https://player.theplatform.com/p/0L7ZPC/D7AjRZyan6zo/embed/select/${this.state.currentVideoInfo.mediaId}?autoPlay=true&mute=false`}
@@ -199,7 +200,7 @@ class Home extends Component {
 						</Grid>
 					{this.state.usersLSvideosClicked &&
 						<Grid item sm={6} >
-							<h3 className="headline2">Recently Watched</h3>
+
 							<Grid container spacing={14} >
 								{this.state.usersLSvideosClicked.map((video) => {
 									return(
@@ -243,7 +244,6 @@ class Home extends Component {
 															{
 															<ListItem button>
 																<SimpleMediaCard
-																	className ="card"
 																	title={results.title}
 																	image={results.image}
 																/>
