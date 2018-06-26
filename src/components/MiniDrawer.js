@@ -191,9 +191,7 @@ class PersistentDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap>
-
                 <h1>YouMundo</h1>
-                <App auth= {auth} />
               </Typography>
               <App auth={auth} />
             </Toolbar>

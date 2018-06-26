@@ -10,15 +10,13 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
-    maxWidth: 345,
-    minWidth: 345,
-    maxHeight: 350,
-    minHeight: 350
+    borderRadius: 20,
+    height: 350
   },
   media: {
-    height: 0,
+    height: "50%",
     paddingTop: '56.25%', // 16:9
-  },
+  }
 };
 
 function SimpleMediaCard(props) {
@@ -35,9 +33,9 @@ function SimpleMediaCard(props) {
           <Typography gutterBottom variant="headline" component="h2">
             {props.title}
           </Typography>
-          <Typography component="p">
+          {/* <Typography component="p">
             {props.description}
-          </Typography>
+          </Typography> */}
         </CardContent>
       </Card>
     </div>

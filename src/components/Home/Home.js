@@ -8,13 +8,6 @@ import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import ListItemText from '@material-ui/core/ListItemText';
-
-
-
-
-
-
-
 let recommendedList = [];
 let videosClicked = [];
 let lsBoolean;
@@ -43,21 +36,20 @@ class Home extends Component {
 		this.setState({
 			usersLSsearches: JSON.parse(localStorage.getItem("userSearches"))
 		})
-		// console.log(this.state);
 
 		this.setState({
 			currentVideoInfo : {
-		 "title": "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
-		 "description": "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos",
-		 "airdate": "2016-08-11T22:30:00Z",
-		 "mediaId": "P4R_3ErslAOQ",
-		 "permalink": "http://now.telemundo.com/video/share/3083345",
-		 "vChipRating": "tv-14",
-		 "seasonNumber": "2016",
-		 "keywords": [
-		  "Telemundo,Noticias Telemundo,Información,profesionales,msn,\"Abrazos no muros\",reencuentro frontera México-EEUU"
-		 ],
-		 "image": "http://stage.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2016/08/11/amor-invade-frontera-de-mexico-y-eeuu.jpg"
+			 "title": "\"Abrazos no muros\", el amor invade la frontera México-EEUU",
+			 "description": "La frontera entre EEUU y México se abrió para que 100 familias se reencontraran después de muchos años por apenas tres minutos",
+			 "airdate": "2016-08-11T22:30:00Z",
+			 "mediaId": "P4R_3ErslAOQ",
+			 "permalink": "http://now.telemundo.com/video/share/3083345",
+			 "vChipRating": "tv-14",
+			 "seasonNumber": "2016",
+			 "keywords": [
+			  "Telemundo,Noticias Telemundo,Información,profesionales,msn,\"Abrazos no muros\",reencuentro frontera México-EEUU"
+			 ],
+			 "image": "http://stage.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2016/08/11/amor-invade-frontera-de-mexico-y-eeuu.jpg"
 		}});
 		(lsVideoList ) ? lsBoolean=true : lsBoolean = false;
 	}
@@ -99,31 +91,17 @@ class Home extends Component {
 		});
 	}
 
-
 	compareSearchesToKeywords(data){
-
 		const searchedWords =  this.state.usersLSsearches;
 		data.map((val, ind)=>{
-			// console.log("val");
-			// console.log(val);
 				if (val.keywords ){
 					val.keywords.forEach((val2)=>{
-						// console.log("val2");
-						// console.log(val2);
 						if (searchedWords){
 							searchedWords.forEach((val3)=>{
 								if(val3 === val2){
-									// console.log("val3");
-									// console.log(val3);
 									const valString = JSON.stringify(val);
 									recommendedList.push(valString);
 									recommendedList = Array.from(new Set(recommendedList));
-									// recommendedList = JSON.parse(recommendedList);
-									// console.log(recommendedList);
-									// return recommendedList;
-									// this.setState({
-									// 	usersRecommendedList: recommendedList
-									// })
 								}
 							})
 						}
@@ -133,10 +111,6 @@ class Home extends Component {
 				}
 				return recommendedList
 			})
-			// console.log("recommendedList=============");
-			// console.log(recommendedList);
-			// return recommendedList
-
 	}
 
 
@@ -152,7 +126,7 @@ class Home extends Component {
 	recentlyViewed(videoInfo){
 		return (
 			<ul key={videoInfo.permalink}>
-				{
+				 {
 						<li  onClick={(e) => this.handleVidClick(videoInfo) }>
 						 <img alt={videoInfo.title} src= {videoInfo.image} height="100" width="100"></img>
 					 </li>
@@ -247,12 +221,12 @@ class Home extends Component {
 															onClick={(e) => {this.handleVidClick(results)}}
 														>
 															{
-															<ListItem button>
-																<SimpleMediaCard
-																	title={results.title}
-																	image={results.image}
-																/>
-															</ListItem>
+																<ListItem button>
+																	<SimpleMediaCard
+																		title={results.title}
+																		image={results.image}
+																	/>
+																</ListItem>
 															}
 														</Grid>
 													)
@@ -288,7 +262,6 @@ class Home extends Component {
 									)
 								}
 							}
-
 							react={{ and: ["SearchSensor"] }}
 						/>
 					}
