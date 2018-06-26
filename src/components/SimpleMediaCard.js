@@ -9,6 +9,16 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
+//   card: {
+//   maxWidth: 345,
+//   minWidth: 345,
+//   maxHeight: 350,
+//   minHeight: 350
+// },
+// media: {
+//   height: 0,
+//   paddingTop: '56.25%', // 16:9
+// }
   card: {
     borderRadius: 20,
     height: 350
