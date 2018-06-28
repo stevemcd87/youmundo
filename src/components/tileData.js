@@ -21,18 +21,6 @@ export const otherMailFolderListItems = (
       </ListItemIcon>
       <h3 style={{fontFamily: 'Helvetica', color: 'rgba(0, 0, 0, 0.70)'}}>Now Trending</h3>
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DeleteIcon />
-      </ListItemIcon>
-      <ListItemText primary="Trash" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ReportIcon />
-      </ListItemIcon>
-      <ListItemText primary="Spam" />
-    </ListItem>
   </div>
 );
 
