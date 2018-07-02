@@ -17,7 +17,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'youmundo.auth0.com',
     clientID: '4KuyASwpsANZiiSYicUdgYM632Q-kImj',
-    redirectUri: 'http://youmundo.herokuapp/callback',
+    redirectUri: 'https://youmundo.herokuapp/callback',
     audience: 'https://youmundo.auth0.com/userinfo',
     responseType: 'token id_token',
     scope: 'openid profile'
